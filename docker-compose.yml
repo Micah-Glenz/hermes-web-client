@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: ./backend
+    container_name: hermes-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  web:
+    build: ./web
+    container_name: hermes-web
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+      - gateway
+
+  gateway:
+    build: ./gateway
+    container_name: hermes-gateway
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./gateway:/app
+    environment:
+      - JWT_PUBLIC_KEY_PATH=/app/jwt_public_key.pem
+    depends_on:
+      - backend

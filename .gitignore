@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.pyc
+__pycache__/
+.venv/
+*.egg-info/
+.DS_Store
+backend/venv/
+backend/db.sqlite3
+backend/jwt_private_key.pem
+*.log
