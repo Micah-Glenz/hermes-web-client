@@ -1,3 +1,4 @@
 django>=5.0
 django-ninja
 djangorestframework-simplejwt
+cryptography>=41.0

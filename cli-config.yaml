@@ -1,0 +1,44 @@
+# Hermes Configuration
+# For the Hermes Web Client project
+# Uses opencode Go provider with DeepSeek V4 Flash
+
+model:
+  provider: opencode-go
+  model: deepseek-v4-flash
+
+custom_providers:
+  - name: opencode-go
+    base_url: "https://opencode.ai/zen/go/v1"
+    api_key: "${OPENCODE_GO_API_KEY}"
+
+terminal:
+  backend: local
+  cwd: "/workspace"
+  timeout: 180
+  lifetime_seconds: 300
+
+compression:
+  enabled: true
+  target_percent: 0.50
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+streaming:
+  enabled: true
+
+skills:
+  creation_nudge_interval: 15
+
+web_gateway:
+  enabled: true
+  port: 8765
+  ws_path: "/ws"
+  jwt_public_key: "/app/jwt_public_key.pem"
+  cors_allowed_origins:
+    - "http://localhost:5173"
+    - "http://localhost:8000"
+  max_connections: 10
+  heartbeat_interval: 30
+  log_level: "info"
